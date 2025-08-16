@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile | Car Wash Finder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #0057b8;
+      --secondary-color: #ff6f61;
+      --highlight-color: #ff9800;
+      --bg-light: #f9f5ff;
+      --text-dark: #1a1a1a;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .back-btn {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .section {
+      padding: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--highlight-color);
+      margin-bottom: 1rem;
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-email {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .profile-stats {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background-color: var(--highlight-color);
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border-radius: var(--radius);
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      text-decoration: none;
+      font-size: 1rem;
+      flex: 1;
+      text-align: center;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--highlight-color);
+      color: var(--highlight-color);
+    }
+
+    .btn:hover {
+      background-color: #e65100;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 152, 0, 0.1);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .profile-section {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-section h3 {
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .booking-history {
+      list-style: none;
+    }
+
+    .booking-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .booking-item:last-child {
+      border-bottom: none;
+    }
+
+    .booking-info h4 {
+      margin-bottom: 0.3rem;
+    }
+
+    .booking-meta {
+      font-size: 0.9rem;
+      color: #666;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .booking-price {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .payment-methods {
+      list-style: none;
+    }
+
+    .payment-method {
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .payment-method:last-child {
+      border-bottom: none;
+    }
+
+    .payment-icon {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+    }
+
+    .payment-info h4 {
+      margin-bottom: 0.3rem;
+    }
+
+    .payment-meta {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .default-badge {
+      background: var(--highlight-color);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      margin-left: auto;
+    }
+
+    .vehicle-list {
+      list-style: none;
+    }
+
+    .vehicle-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .vehicle-item:last-child {
+      border-bottom: none;
+    }
+
+    .vehicle-icon {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+    }
+
+    .vehicle-info h4 {
+      margin-bottom: 0.3rem;
+    }
+
+    .vehicle-meta {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .payment-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+      font-size: 2rem;
+      color: white;
+    }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.8rem 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #555;
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+
+    .nav-item i {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .nav-item.active {
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 480px) {
+      .section {
+        padding: 1rem;
+      }
+      
+      .section-title {
+        font-size: 1.4rem;
+      }
+      
+      .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .profile-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <button class="back-btn" onclick="window.history.back()"><i class="fas fa-arrow-left"></i></button>
+  My Profile
+</header>
+
+<div class="section">
+  <div class="profile-header">
+    <img src="https://via.placeholder.com/100/0057b8/ffffff?text=User" alt="Profile" class="profile-avatar">
+    <h2 class="profile-name">John Doe</h2>
+    <p class="profile-email">john.doe@example.com</p>
+    
+    <div class="profile-stats">
+      <div class="stat-item">
+        <div class="stat-value">12</div>
+        <div class="stat-label">Bookings</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Vehicles</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">2</div>
+        <div class="stat-label">Payments</div>
+      </div>
+    </div>
+    
+    <div class="profile-actions">
+      <button class="btn"><i class="fas fa-edit"></i> Edit Profile</button>
+      <button class="btn btn-outline"><i class="fas fa-cog"></i> Settings</button>
+    </div>
+  </div>
+
+  <div class="profile-section">
+    <h3><i class="fas fa-history"></i> Booking History</h3>
+    <ul class="booking-history">
+      <li class="booking-item">
+        <div class="booking-info">
+          <h4>Sparkle Auto Wash</h4>
+          <div class="booking-meta">
+            <span><i class="fas fa-calendar-alt"></i> 15 Jun 2023</span>
+            <span><i class="fas fa-clock"></i> 10:30 AM</span>
+          </div>
+        </div>
+        <div class="booking-price">$25.50</div>
+      </li>
+      <li class="booking-item">
+        <div class="booking-info">
+          <h4>EcoWash Premium</h4>
+          <div class="booking-meta">
+            <span><i class="fas fa-calendar-alt"></i> 8 Jun 2023</span>
+            <span><i class="fas fa-clock"></i> 2:15 PM</span>
+          </div>
+        </div>
+        <div class="booking-price">$35.75</div>
+      </li>
+      <li class="booking-item">
+        <div class="booking-info">
+          <h4>Quick Shine Express</h4>
+          <div class="booking-meta">
+            <span><i class="fas fa-calendar-alt"></i> 1 Jun 2023</span>
+            <span><i class="fas fa-clock"></i> 9:00 AM</span>
+          </div>
+        </div>
+        <div class="booking-price">$18.00</div>
+      </li>
+    </ul>
+    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">
+      <i class="fas fa-list"></i> View All Bookings
+    </button>
+  </div>
+
+  <div class="profile-section">
+    <h3><i class="fas fa-credit-card"></i> Payment Methods</h3>
+    <ul class="payment-methods">
+      <li class="payment-method">
+        <i class="fab fa-cc-visa payment-icon"></i>
+        <div class="payment-info">
+          <h4>Visa •••• 1234</h4>
+          <p class="payment-meta">Expires 05/25</p>
+        </div>
+        <span class="default-badge">Default</span>
+      </li>
+      <li class="payment-method">
+        <i class="fab fa-cc-mastercard payment-icon"></i>
+        <div class="payment-info">
+          <h4>Mastercard •••• 5678</h4>
+          <p class="payment-meta">Expires 09/24</p>
+        </div>
+      </li>
+    </ul>
+    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">
+      <i class="fas fa-plus-circle"></i> Add Payment Method
+    </button>
+  </div>
+
+  <div class="profile-section">
+    <h3><i class="fas fa-car"></i> My Vehicles</h3>
+    <ul class="vehicle-list">
+      <li class="vehicle-item">
+        <i class="fas fa-sedan vehicle-icon"></i>
+        <div class="vehicle-info">
+          <h4>Toyota Camry</h4>
+          <p class="vehicle-meta">ABC-1234 • Sedan</p>
+        </div>
+      </li>
+      <li class="vehicle-item">
+        <i class="fas fa-truck vehicle-icon"></i>
+        <div class="vehicle-info">
+          <h4>Ford F-150</h4>
+          <p class="vehicle-meta">XYZ-5678 • Truck</p>
+        </div>
+      </li>
+    </ul>
+    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">
+      <i class="fas fa-plus-circle"></i> Add Vehicle
+    </button>
+  </div>
+</div>
+
+<footer>
+  <div>Payment Methods Accepted</div>
+  <div class="payment-icons">
+    <i class="fab fa-cc-visa"></i>
+    <i class="fab fa-cc-mastercard"></i>
+    <i class="fas fa-credit-card"></i>
+    <i class="fab fa-cc-paypal"></i>
+  </div>
+  <p>&copy; 2025 Car Wash Finder. All rights reserved.</p>
+</footer>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a href="book.html" class="nav-item">
+    <i class="fas fa-search"></i>
+    <span>Search</span>
+  </a>
+  <a href="#" class="nav-item">
+    <i class="fas fa-bookmark"></i>
+    <span>Saved</span>
+  </a>
+  <a href="profile.html" class="nav-item active">
+    <i class="fas fa-user"></i>
+    <span>Profile</span>
+  </a>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add click handler for "Add Payment Method" button
+    document.querySelector('.profile-section:nth-of-type(2) .btn').addEventListener('click', function() {
+      window.location.href = 'booking-details.html';
+    });
+    
+    // Add click handler for "Add Vehicle" button
+    document.querySelector('.profile-section:nth-of-type(3) .btn').addEventListener('click', function() {
+      alert('Vehicle addition form would open here');
+    });
+    
+    // Add click handler for "View All Bookings" button
+    document.querySelector('.profile-section:first-of-type .btn').addEventListener('click', function() {
+      alert('Full booking history would display here');
+    });
+    
+    // Add click handler for "Edit Profile" button
+    document.querySelector('.profile-actions .btn:first-of-type').addEventListener('click', function() {
+      alert('Profile editor would open here');
+    });
+    
+    // Add click handler for "Settings" button
+    document.querySelector('.profile-actions .btn-outline').addEventListener('click', function() {
+      alert('Settings would open here');
+    });
+  });
+</script>
+
+</body>
+</html>

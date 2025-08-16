@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Confirmation | Car Wash Finder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #0057b8;
+      --secondary-color: #ff6f61;
+      --highlight-color: #ff9800;
+      --success-color: #4CAF50;
+      --bg-light: #f9f5ff;
+      --text-dark: #1a1a1a;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .back-btn {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .section {
+      padding: 1.5rem;
+    }
+
+    .confirmation-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .confirmation-icon {
+      font-size: 4rem;
+      color: var(--success-color);
+      margin-bottom: 1rem;
+    }
+
+    .confirmation-title {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+
+    .confirmation-subtitle {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .booking-details {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-item:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .detail-value {
+      font-weight: bold;
+    }
+
+    .price-total {
+      font-size: 1.2rem;
+      color: var(--highlight-color);
+    }
+
+    .btn {
+      background-color: var(--highlight-color);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      text-decoration: none;
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 1rem;
+      display: block;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: #e65100;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--highlight-color);
+      color: var(--highlight-color);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 152, 0, 0.1);
+    }
+
+    .qr-code {
+      width: 150px;
+      height: 150px;
+      margin: 1rem auto;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+    }
+
+    .qr-code i {
+      font-size: 3rem;
+      color: #333;
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.8rem 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #555;
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+
+    .nav-item i {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .nav-item.active {
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 480px) {
+      .section {
+        padding: 1rem;
+      }
+      
+      .confirmation-title {
+        font-size: 1.5rem;
+      }
+      
+      .confirmation-subtitle {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <button class="back-btn" onclick="window.history.back()"><i class="fas fa-arrow-left"></i></button>
+  Booking Confirmation
+</header>
+
+<div class="section">
+  <div class="confirmation-card">
+    <div class="confirmation-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <h1 class="confirmation-title">Booking Confirmed!</h1>
+    <p class="confirmation-subtitle">Your car wash appointment has been successfully scheduled</p>
+    
+    <div class="qr-code">
+      <i class="fas fa-qrcode"></i>
+    </div>
+    <p>Show this QR code at the car wash</p>
+  </div>
+
+  <div class="booking-details">
+    <h2 style="margin-bottom: 1rem; color: var(--primary-color);">Booking Details</h2>
+    
+    <div class="detail-item">
+      <span class="detail-label">Car Wash:</span>
+      <span class="detail-value" id="wash-name">Sparkle Auto Wash</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Date:</span>
+      <span class="detail-value" id="booking-date">June 15, 2023</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Time:</span>
+      <span class="detail-value" id="booking-time">10:30 AM</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Vehicle:</span>
+      <span class="detail-value" id="vehicle-type">Toyota Camry (Sedan)</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">License Plate:</span>
+      <span class="detail-value" id="license-plate">ABC-1234</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Services:</span>
+      <span class="detail-value" id="services">Exterior Wash, Wax, Tire Shine</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label">Total:</span>
+      <span class="detail-value price-total" id="total-price">$35.50</span>
+    </div>
+  </div>
+
+  <a href="index.html" class="btn">
+    <i class="fas fa-home"></i> Back to Home
+  </a>
+  <button class="btn btn-outline" onclick="window.print()">
+    <i class="fas fa-print"></i> Print Confirmation
+  </button>
+</div>
+
+<footer>
+  <p>Need help? Contact us at support@carwashfinder.com</p>
+  <p>&copy; 2025 Car Wash Finder. All rights reserved.</p>
+</footer>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a href="book.html" class="nav-item">
+    <i class="fas fa-search"></i>
+    <span>Search</span>
+  </a>
+  <a href="#" class="nav-item">
+    <i class="fas fa-bookmark"></i>
+    <span>Saved</span>
+  </a>
+  <a href="profile.html" class="nav-item">
+    <i class="fas fa-user"></i>
+    <span>Profile</span>
+  </a>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get booking details from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Set booking details
+    if (urlParams.has('washName')) {
+      document.getElementById('wash-name').textContent = urlParams.get('washName');
+    }
+    if (urlParams.has('date')) {
+      const date = new Date(urlParams.get('date'));
+      document.getElementById('booking-date').textContent = date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    }
+    if (urlParams.has('time')) {
+      document.getElementById('booking-time').textContent = urlParams.get('time');
+    }
+    if (urlParams.has('vehicleType')) {
+      const vehicleType = urlParams.get('vehicleType');
+      let displayType = '';
+      switch(vehicleType) {
+        case 'sedan': displayType = 'Sedan'; break;
+        case 'suv': displayType = 'SUV'; break;
+        case 'truck': displayType = 'Truck'; break;
+        case 'van': displayType = 'Van'; break;
+        default: displayType = vehicleType;
+      }
+      document.getElementById('vehicle-type').textContent = 
+        `${urlParams.get('licensePlate') || 'Not specified'} • ${displayType}`;
+    }
+    if (urlParams.has('services')) {
+      document.getElementById('services').textContent = urlParams.get('services');
+    }
+    if (urlParams.has('totalPrice')) {
+      document.getElementById('total-price').textContent = urlParams.get('totalPrice');
+    }
+    
+    // Generate a simple "QR code" for demo purposes
+    const qrCode = document.querySelector('.qr-code');
+    qrCode.innerHTML = `
+      <div style="text-align: center;">
+        <div style="font-size: 0.7rem; margin-bottom: 0.5rem;">Booking ID:</div>
+        <div style="font-weight: bold; letter-spacing: 2px;">${generateBookingId()}</div>
+      </div>
+    `;
+  });
+
+  function generateBookingId() {
+    return 'CW-' + Math.floor(100000 + Math.random() * 900000);
+  }
+</script>
+</body>
+</html>
